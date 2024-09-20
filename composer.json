@@ -1,0 +1,12 @@
+{
+    "name": "maosiji/phpsuda",
+    "type": "library",
+    "license": "Apache-2.0 license",
+    "authors": [
+        {
+            "name": "maosiji",
+            "email": "code@maosiji.cn"
+        }
+    ],
+    "require": {}
+}
