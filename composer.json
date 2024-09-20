@@ -1,5 +1,6 @@
 {
     "name": "maosiji/phpsuda",
+    "description": "...",
     "type": "library",
     "license": "Apache-2.0 license",
     "authors": [
@@ -8,5 +9,13 @@
             "email": "code@maosiji.cn"
         }
     ],
-    "require": {}
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "MAOSIJI\\phpsuda\\": "src/"
+        }
+    }
 }
