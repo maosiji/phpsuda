@@ -1,6 +1,6 @@
 {
     "name": "maosiji/phpsuda",
-    "description": "...",
+    "description": "封装一些常用功能，便于快速开发",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
