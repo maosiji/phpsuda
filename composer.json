@@ -1,15 +1,17 @@
 {
     "name": "maosiji/phpsuda",
     "description": "封装一些常用功能，便于快速开发",
+    "keywords": ["快速开发", "常用功能"],
+    "homepage": "https://maosiji.com",
     "type": "library",
     "license": "Apache-2.0",
     "authors": [
         {
             "name": "maosiji",
-            "email": "code@maosiji.cn"
+            "email": "code@maosiji.cn",
+            "homepage": "https://www.maosiji.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "php": ">=5.6"
     },
