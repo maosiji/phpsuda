@@ -1,6 +1,4 @@
 <?php
-
-namespace MAOSIJI\phpsuda;
 /*
  * author               : 猫斯基
  * url                  : maosiji.com
@@ -14,24 +12,13 @@ namespace MAOSIJI\phpsuda;
  * read me              :
  * remind               ：
  */
-if ( !class_exists( 'MaoTool' ) ) {
-	class MaoTool
-	{
-		
-		function __construct ()
-		{
-		}
-		
-		/**
-		 * @param $length	int 随机数位数
-		 *
-		 * @return int		指定位数的随机数
-		 */
-		public function getRandNumber ( $length = 6 ): int
-		{
-			return rand( pow( 10, $length - 1 ), pow( 10, $length ) - 1 );
-		}
-		
-		
-	}
-}
+require __DIR__ . '/../vendor/autoload.php';
+use MAOSIJI\phpsuda\time\MaoTime;
+
+// 计算时间差
+$beginTime = time();
+//$endTime = strtotime("2025-02-02");
+$endTime = time();
+$maoTime = new MaoTime();
+$timeDiff = $maoTime->maoTimeDiff($beginTime, $endTime);
+print_r($timeDiff);

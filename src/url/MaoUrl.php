@@ -26,7 +26,7 @@ if ( !class_exists( 'MaoUrl' ) ) {
 		/**
 		 * @return string: 当前网页链接
 		 */
-		public function maoGet ()
+		public function getUrl (): string
 		{
 			
 			$sys_protocal = isset( $_SERVER['SERVER_PORT'] ) && $_SERVER['SERVER_PORT'] == '443' ? 'https://' : 'http://';
@@ -45,33 +45,30 @@ if ( !class_exists( 'MaoUrl' ) ) {
 		 *
 		 * @return string 删除指定参数后的链接
 		 */
-		public function maoDeleteUrlParam ( $url, $arr )
+		public function urlDeleteParam ( $url, $arr ): string
 		{
-			$pageURL = 'http';
-			if ( isset( $_SERVER['HTTPS'] ) && $_SERVER["HTTPS"] == "on" ) {
-				$pageURL .= "s";
+			$p = ( !empty( $arr ) && is_array( $arr ) ) ? $arr : array();
+			if ( count( $p ) == 0 ) {
+				return $url;
 			}
-			$pageURL .= "://";
-			$this_page = $_SERVER["REQUEST_URI"];
-			//过滤要提交的参数
-			if ( empty( $arr ) ) {
-				if ( strpos( $this_page, "?" ) !== FALSE ) {
-					$this_pages = explode( "?", $this_page );
-					$this_page = reset( $this_pages );
-				}
+			
+			$url = !empty( $url ) ? $url : $this->getUrl();
+			
+			parse_str( parse_url( $url, PHP_URL_QUERY ), $params );
+			
+			foreach ( $p as $pkey=>$pval ) {
+				unset( $params[$pkey] );
+			}
+			
+			$query = http_build_query( $params );
+			
+			if ( strpos( $url, '?' ) ) {
+				$this_url = strstr( $url, '?', TRUE );
 			} else {
-				parse_str( parse_url( $this_page, PHP_URL_QUERY ), $params );
-				foreach ( $arr as $one ) {
-					unset( $params[$one] );
-				}
-				$query = http_build_query( $params );
-				$this_page = str_replace( '?' . $_SERVER['QUERY_STRING'], '', $this_page );
-				$this_page .= !empty( $query ) ? '?' . $query : '';
+				$this_url = $url;
 			}
 			
-			$pageURL .= $_SERVER["SERVER_NAME"] . $this_page;
-			
-			return $pageURL;
+			return $this_url . '?' . $query;
 		}
 		
 		/*
@@ -83,15 +80,14 @@ if ( !class_exists( 'MaoUrl' ) ) {
 		 *
 		 * @return string    添加指定参数后的链接
 		 */
-		public function add_url_params ( $url, $arr )
+		public function urlAddParam ( $url, $arr ): string
 		{
-			
-			$url = !empty( $url ) ? $url : $this->maoGet();
 			$p = ( !empty( $arr ) && is_array( $arr ) ) ? $arr : array();
-			
 			if ( count( $p ) == 0 ) {
 				return $url;
 			}
+			
+			$url = !empty( $url ) ? $url : $this->getUrl();
 			
 			parse_str( parse_url( $url, PHP_URL_QUERY ), $params );
 			
@@ -112,4 +108,5 @@ if ( !class_exists( 'MaoUrl' ) ) {
 		
 		
 	}
+	
 }

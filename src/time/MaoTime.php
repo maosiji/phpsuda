@@ -28,7 +28,7 @@ if ( !class_exists( 'MaoTime' ) ) {
 		 *
 		 * @return array        返回时间间隔数组 array('day'=>'', 'hour'=>'', 'min'=>'', 'sec=>'')
 		 */
-		public function maoTimeDiff ( $begin_time, $end_time )
+		public function maoTimeDiff ( $begin_time, $end_time ): array
 		{
 			if ( $begin_time < $end_time ) {
 				$starttime = $begin_time;
