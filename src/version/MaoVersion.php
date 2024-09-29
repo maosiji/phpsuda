@@ -22,20 +22,18 @@ if ( !class_exists('MaoVersion') ) {
 			
 		}
 		
-		/*
-		 *
-		 * 版本号格式一：10.0.24.458
-		 * 版本号格式一：10.0.24
-		 * 版本号格式一：10.0
-		 * 版本号格式一：10
-		 * */
 		/**
 		 * @param $version	: 版本号
 		 *
 		 * @return bool		检测版本号是否是正确的格式。检测结果：true 是，false 否
+		 *               版本号格式一：10.0.24.458
+		 *  			 版本号格式一：10.0.24
+		 *  			 版本号格式一：10.0
+		 *  			 版本号格式一：10
 		 */
 		public function checkVersion ( $version ): bool
 		{
+			if (empty($version)) {return false;}
 			
 			$one = preg_match( '/^[1-9][0-9]*$/', $version );
 			$two = preg_match( '/^[0-9]*\.[0-9]*$/', $version );
