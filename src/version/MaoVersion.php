@@ -23,7 +23,7 @@ if ( !class_exists('MaoVersion') ) {
 		}
 		
 		/**
-		 * @param $version	: 版本号
+		 * @param $version	: 版本号，空值则返回false
 		 *
 		 * @return bool		检测版本号是否是正确的格式。检测结果：true 是，false 否
 		 *               版本号格式一：10.0.24.458
