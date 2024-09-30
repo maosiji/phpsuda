@@ -22,7 +22,12 @@ if ( !class_exists('MaoSafe') ) {
 		
 		}
 		
-		public function checkTooManyRequests() {
+		/**
+		 * @param int $timediff :自定义时间间隔，默认5秒
+		 *
+		 * @return void 需要在页面顶部添加 session_start();
+		 */
+		public function checkTooManyRequests( int $timediff=5 ) {
 			// 检查session中是否有上一次请求的时间戳
 			if (isset($_SESSION['last_request_time'])) {
 				$lastRequestTime = $_SESSION['last_request_time'];
@@ -32,7 +37,7 @@ if ( !class_exists('MaoSafe') ) {
 				$timeDifference = $currentTime - $lastRequestTime;
 				
 				// 设定最小请求间隔时间（秒）
-				$minInterval = 5; // 5秒
+				$minInterval = $timediff;
 				
 				if ($timeDifference < $minInterval) {
 					header("HTTP/1.1 429 Too Many Requests");
