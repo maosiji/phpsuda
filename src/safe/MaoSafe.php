@@ -1,6 +1,7 @@
 <?php
 
 namespace MAOSIJI\phpsuda\safe;
+session_start();
 /*
  * author               : 猫斯基
  * url                  : maosiji.com
