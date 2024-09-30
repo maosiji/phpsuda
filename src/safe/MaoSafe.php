@@ -1,6 +1,6 @@
 <?php
 
-namespace MAOSIJI\phpsuda\Safe;
+namespace MAOSIJI\phpsuda\safe;
 /*
  * author               : 猫斯基
  * url                  : maosiji.com
