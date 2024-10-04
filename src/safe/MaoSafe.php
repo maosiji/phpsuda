@@ -85,8 +85,8 @@ if ( !class_exists('MaoSafe') ) {
 		 * @param string $type			: all/session/cookie
 		 * @param int    $isDelete		: 验证完成后是否删除。默认 1.
 		 *                          0		不删除
-		 *                          1		验证后删除
-		 *                          2		验证成功后删除
+		 *                          1		验证成功后删除
+		 *                          2		验证后删除
 		 *
 		 * @return bool		: 验证设置的session或cookie
 		 */
@@ -110,18 +110,53 @@ if ( !class_exists('MaoSafe') ) {
 				}
 			}
 			
-			if ( $isDelete===2 && $flag===TRUE ) {
-				setcookie("captcha", '', time() - 3600, '/');
-				unset($_SESSION['captcha']);
+			if ( $isDelete===1 && $flag===TRUE ) {
+				setcookie($captchaName, '', time() - 3600, '/');
+				unset($_SESSION[$captchaName]);
 			}
-			else if ( $isDelete===1 ) {
-				setcookie("captcha", '', time() - 3600, '/');
-				unset($_SESSION['captcha']);
+			else if ( $isDelete===2 ) {
+				setcookie($captchaName, '', time() - 3600, '/');
+				unset($_SESSION[$captchaName]);
 			}
 			
 			return $flag;
 		}
 		
+		/**
+		 * @param string $captchaName	: 验证码名称
+		 * @param string $type			: all/session/cookie
+		 * @param int    $isDelete		: 获取后是否删除。默认 0.
+		 *                          0	不删除
+		 *                          1	删除
+		 *
+		 * @return bool		: 返回请求名称对应的值
+		 */
+		public function getCaptcha ( string $captchaName, string $type='all', int $isDelete=0 ): bool
+		{
+			$value = '';
+			
+			if ( $type==='all' ) {
+				if ( $_SESSION[$captchaName]===$_COOKIE[$captchaName] ) {
+					$value = $_SESSION[$captchaName];
+				}
+				else {
+					$value = 'session 与 cookie 的值不一样，请检查！';
+				}
+			}
+			else if ( $type==='session' ) {
+				$value = $_SESSION[$captchaName];
+			}
+			else if ( $type==='cookie' ) {
+				$value = $_COOKIE[$captchaName];
+			}
+			
+			if ( $isDelete===1 ) {
+				setcookie($captchaName, '', time() - 3600, '/');
+				unset($_SESSION[$captchaName]);
+			}
+			
+			return $value;
+		}
 		
 		
 	}
