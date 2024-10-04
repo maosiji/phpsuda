@@ -62,6 +62,7 @@ if ( !class_exists('MaoSafe') ) {
 		public function setCaptcha( string $captchaName, string $captchaCode, string $type='all', int $timediff=600 ): bool
 		{
 			$flag = TRUE;
+			$captchaCode = strtolower($captchaCode);
 			
 			if ( $type==='all' ) {
 				setcookie($captchaName, $captchaCode, $timediff, '/');
@@ -94,6 +95,7 @@ if ( !class_exists('MaoSafe') ) {
 		public function checkCaptcha ( string $captchaName, string $captchaCode, string $type='all', int $isDelete=1 ): bool
 		{
 			$flag = FALSE;
+			$captchaCode = strtolower($captchaCode);
 			
 			if ( $type==='all' ) {
 				if ( $captchaCode===$_COOKIE[$captchaName] && $captchaCode===$_SESSION[$captchaName] ) {
