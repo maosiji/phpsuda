@@ -129,9 +129,9 @@ if ( !class_exists('MaoSafe') ) {
 		 *                          0	不删除
 		 *                          1	删除
 		 *
-		 * @return bool		: 返回请求名称对应的值
+		 * @return string		: 返回请求名称对应的值
 		 */
-		public function getCaptcha ( string $captchaName, string $type='all', int $isDelete=0 ): bool
+		public function getCaptcha ( string $captchaName, string $type='all', int $isDelete=0 ): string
 		{
 			$value = '';
 			
