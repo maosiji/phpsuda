@@ -2,6 +2,7 @@
 
 namespace MAOSIJI\phpsuda\safe;
 session_start();
+date_default_timezone_set('Asia/Shanghai');
 /*
  * author               : 猫斯基
  * url                  : maosiji.com
